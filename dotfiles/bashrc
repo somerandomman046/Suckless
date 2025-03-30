@@ -1,0 +1,31 @@
+# Enhanced bash completion settings
+bind 'set show-all-if-ambiguous on'
+bind 'set show-all-if-unmodified on'
+bind 'set completion-ignore-case on'
+bind 'set menu-complete-display-prefix on'
+bind 'set colored-completion-prefix on'
+bind 'set colored-stats on'
+bind 'TAB:menu-complete'
+
+# alias
+alias ls="eza --icons"
+alias la="eza -a --icons"
+alias ll="eza -l --icons"
+alias lla="eza -la --icons"
+alias install="doas pacman -S"
+alias s="doas pacman -Ss"
+alias r="doas pacman -Rns"
+alias u="doas pacman -Syu"
+alias change="tcc -run ~/.config/change_wallpaper.c"
+alias p="paru"
+alias v="nvim"
+alias dv="doas nvim"
+alias fetch="fastfethc ~/.config/fastfetch/art.txt"
+
+# Prompt
+BLUE="\e[34m"
+GREEN="\e[32m"
+RESET="\e[0m"
+PS1="${BLUE} \w${GREEN}  ${RESET}"
+
+pfetch

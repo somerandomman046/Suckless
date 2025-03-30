@@ -1,0 +1,1 @@
+(xinput float 8 &&  xdotool key super+n && sleep 0.1 && xinput reattach 8 3)

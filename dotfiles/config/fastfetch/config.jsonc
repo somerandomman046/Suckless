@@ -13,8 +13,8 @@
   "modules": [
     "break",
     {
-      "type": "custom",
-      "format": "     comic@artix",
+      "type": "title",
+      "key": "",
       "outputColor": "cyan",
     },
     {

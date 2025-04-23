@@ -9,8 +9,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 16;       /* horizontal padding of bar */
-static const char *fonts[] = {"CaskaydiaMonoNerdFont-Bold:size=11.2"};
-static const char dmenufont[] = "CaskaydiaMonoNerdFont-Bold:size=12.6";
+static const char *fonts[] = {"CaskaydiaMonoNerdFont-Bold:size=12.2"};
+static const char dmenufont[] = "CaskaydiaMonoNerdFont-Bold:size=13.6";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -43,8 +43,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"", tile},  /* first entry is default */
-    {"󰭩", NULL}, /* no layout function means floating behavior */
+    {"󰭶", tile},  /* first entry is default */
+    {"󱟲", NULL}, /* no layout function means floating behavior */
     {"", monocle},
 };
 
@@ -68,26 +68,34 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[] = {"bash", "-c", "st -e bash  &  wal -R -q ",NULL};
 
+static const char *rofi[]  = { "rofi", "-show", "drun", "-theme", "~/.config/rofi/config.rasi", NULL };
+
+static const char *volUp[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+2%", NULL};
+static const char *volDown[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-2%", NULL};
+
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,			XK_F1,	  spawn,	  {.v = setkbd_us} },
-	{ MODKEY,			XK_F2,	  spawn,	  {.v = setkbd_ar} },
-	{ MODKEY,                       XK_n,     xrdb,           {.v = NULL } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,			XK_F8,	   spawn, 	   {.v = volUp} },
+	{ MODKEY,			XK_F7,	   spawn, 	   {.v = volDown} },
+	{ MODKEY,			XK_F1,	   spawn,	   {.v = setkbd_us} },
+	{ MODKEY,			XK_F2,	   spawn,	   {.v = setkbd_ar} },
+	{ MODKEY,                       XK_d,      spawn,          {.v = rofi } },
+	{ MODKEY,                       XK_n,      xrdb,           {.v = NULL } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,		        XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY,		        XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -130,4 +138,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-

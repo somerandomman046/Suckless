@@ -10,6 +10,7 @@
 
 #define WALL_DIR "/home/comic/.config/wallpapers"
 #define MAX_FILES 4096
+#define HOOK_SCRIPT "$HOME/.config/startup/color_scheme"
 
 static int valid_file(const char *name) { return name[0] != '.'; }
 
@@ -85,5 +86,8 @@ int main(void)
 
     int ok = run_walrs(target);
     free(target);
+
+    system(HOOK_SCRIPT);
+
     return ok;
 }
